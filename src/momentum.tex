@@ -12,7 +12,7 @@
 \begin{document}
 
 \title{Momentum\\
-{\footnotesize \textsuperscript{A fast blockchain platform for decentralized apps and games}}
+{\footnotesize \textsuperscript{A general purpose blockchain platform}}
 }
 
 \author{\IEEEauthorblockN{1\textsuperscript{st} Given Name Surname}
@@ -36,11 +36,33 @@ blockchain, smart contracts, cryptocurrency, DeFi, DLT
 \end{IEEEkeywords}
 
 \section{Introduction}
-In our proposed system, nodes produce blocks containing transactions and share them with the network.
-Utilizing a mechanism called proof-of-popularity, nodes work together to ensure that there is only one authorative block for each timestamp $t$.
-The system is secure as long as honest nodes own more Momentum than conspiring nodes.
+In our proposed system, nodes work together to ensure the integrity of a distributed ledger.
+Transactions happen within blocks, which are published and stored.
+Utilizing a mechanism called proof-of-popularity, we ensure that there is only one authorative block for each timestamp $t$.
 
-\section{Blocks}
+\section{Definitions}
+
+\subsection{Block}
+
+\subsection{Timestamp}
+
+\subsection{Node}
+
+\section{Consensus}
+
+\subsection{Weighting Function}
+
+\subsection{Signature Request}
+
+\subsection{Proof of Popularity}
+
+\section{Data Distribution}
+Nodes store their chain data in a BitTorrent-like datastructure and advertise the total popularity value
+of their chain to other nodes. Other nodes should always download the chain with the highest total popularity.
+
+
+\subsection{Peer Discovery}
+TODO: Utilize BitTorrent Tracker
 
 \section{Consensus}
 
