@@ -26,9 +26,9 @@ email address or ORCID}
 
 \begin{abstract}
 This document outlines the key concepts and operational mechanics of a proposed blockchain
-system and decentralized currency - Momentum -, designed to ensure security, fairness,
-and resistance to adversarial actions through innovative use of timestamps and a unique
-popularity mechanism.
+system designed to ensure security, fairness,
+and resistance to adversarial actions through a novel
+consensus algorithm.
 \end{abstract}
 
 \begin{IEEEkeywords}
@@ -37,8 +37,8 @@ blockchain, smart contracts, cryptocurrency, DeFi, DLT
 
 \section{Introduction}
 In our proposed system, nodes work together to ensure the integrity of a distributed ledger.
-Transactions happen within blocks, which are published and stored.
-Utilizing a mechanism called proof-of-popularity, we ensure that there is only one authorative block for each timestamp $t$.
+For each timestamp in our system, nodes produce, store, and publish blocks containing transactions.
+Utilizing a novel consensus algorithm called proof-of-popularity, we ensure that there is only one authorative block for each timestamp $t$.
 
 \section{Definitions}
 
@@ -47,6 +47,21 @@ Utilizing a mechanism called proof-of-popularity, we ensure that there is only o
 \subsection{Timestamp}
 
 \subsection{Node}
+
+\section{Network}
+On a high level, a well-behaved node in the Momentum network acts like this:
+
+\begin{enumerate}
+\item Await total popularity advertisements from peers.
+\item Download block with highest popularity
+\item Validate block
+\item Discard conflicting blocks
+\item Generate new block
+\item Send block hash to peers
+\item Await signatures from peers
+\item Append block to chain and advertise total popularity
+\item Go to 1
+\end{enumerate}
 
 \section{Consensus}
 
