@@ -56,6 +56,7 @@ On a high level, a well-behaved node in the Momentum network acts like this:
 \item Download block with highest popularity
 \item Validate block
 \item Discard conflicting blocks
+\item Await next timestamp
 \item Generate new block
 \item Send block hash to peers
 \item Await signatures from peers
@@ -71,13 +72,20 @@ On a high level, a well-behaved node in the Momentum network acts like this:
 
 \subsection{Proof of Popularity}
 
-\section{Data Distribution}
-Nodes store their chain data in a BitTorrent-like datastructure and advertise the total popularity value
+\section{Distributed Hash Table}
+Nodes store chain data in a DHT datastructure and advertise the total popularity value
 of their chain to other nodes. Other nodes should always download the chain with the highest total popularity.
 
 
 \subsection{Peer Discovery}
-TODO: Utilize BitTorrent Tracker
+TODO: Utilize DHT library
+
+\section{Considerations}
+
+\subsection{Network speed}
+The distribution of the last block might take a long time, especially as the network
+grows and the number of signatures per block increases. The timestamp interval has to be chosen in a way
+to allow for a good amount of time for the last block to propagate through the DHT to many nodes.
 
 \section{Conclusion}
 This shit doesn't even work.
