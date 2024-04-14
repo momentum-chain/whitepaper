@@ -26,9 +26,7 @@ email address or ORCID}
 
 \begin{abstract}
 This document outlines the key concepts and operational mechanics of a proposed blockchain
-system designed to ensure security, fairness,
-and resistance to adversarial actions through a novel
-consensus algorithm.
+system designed utilizing a novel consensus algorithm called proof-of-popularity.
 \end{abstract}
 
 \begin{IEEEkeywords}
@@ -36,33 +34,62 @@ blockchain, smart contracts, cryptocurrency, DeFi, DLT
 \end{IEEEkeywords}
 
 \section{Introduction}
-In our proposed system, nodes work together to ensure the integrity of a distributed ledger.
-For each timestamp in our system, nodes produce, store, and publish blocks containing transactions.
-Utilizing a novel consensus algorithm called proof-of-popularity, we ensure that there is only one authorative block for each timestamp $t$.
+Current conventional blockchain systems rely on either proof-of-work or proof-of-stake, which both 
+come with their own set of problems: Proof-of-work requires a large amount of computational power,
+which in our resource-constrained world draws lots of criticism for its wastefulness. Proof-of-stake
+usually involves pre-mining, which assigns a large amount of its value to predetermined wallet addresses.
+
+We propose a novel consensus algorithm called proof-of-popularity to address these problems and offer an
+alternative to conventional consensus algorithms.
+
+The following paper will outline the key concepts and operational mechanics of a proposed blockchain
+system called Momentum, utilizing proof-of-popularity.
 
 \section{Definitions}
 
-\subsection{Block}
-
-\subsection{Timestamp}
-
 \subsection{Node}
 
-\section{Network}
+A participating Machine (Computer) in the Momentum Network. 
+
+\subsection{Drift}
+
+Each block has a $block drift$ value. This value is cal
+
+\subsection{Popularity}
+
+The popularity of a block
+
+\section{Overview}
+In a proof-of-popularity-based blockchain, the valid chain is always the chain that contains the block with the highest popularity.
+Nodes work together to determine the popularity of any given block and ensure its integrity and thus the integrity of the network itself.
+
 On a high level, a well-behaved node in the Momentum network acts like this:
 
 \begin{enumerate}
 \item Await total popularity advertisements from peers.
 \item Download block with highest popularity
 \item Validate block
-\item Discard conflicting blocks
 \item Await next timestamp
-\item Generate new block
+\item Generate new block candidate $b$
 \item Send block hash to peers
-\item Await signatures from peers
-\item Append block to chain and advertise total popularity
+\item Await block hashes and signatures
+\item Send signature to the producer of the block with the lowest $block drift$
+\item Append block candidate to chain and advertise total popularity
 \item Go to 1
 \end{enumerate}
+
+\subsection{Block validation}
+
+A block is valid is if:
+
+\begin{itemize}
+\item There is no block with the same or lower timestamp and higher popularity.
+\item The referenced previous block is valid.
+\item The timestamp of the block is exactly 1 greater than the timestamp of the referenced previous block.
+\item The timestamp of the block is lower or equal than the current timestamp.
+\item The $block drift$ value is correct
+\item The $total drift$ value equals the $total drift$ value of the referenced previous block plus the $block drift$ value of the block.
+\end{itemize}
 
 \section{Consensus}
 
@@ -88,7 +115,10 @@ grows and the number of signatures per block increases. The timestamp interval h
 to allow for a good amount of time for the last block to propagate through the DHT to many nodes.
 
 \section{Conclusion}
-This shit doesn't even work.
+Momentum and its proof-of-popularity-based approach offers non-trivial benefits over conventional blockchain systems.
+For one, it does not utilize proof-of-work,
+and as such fits nicely into a resource-constrained and climate-consious environment. There also is no pre-mining of
+any form, which is usually required in a proof-of-stake blockchain.
 
 
 
