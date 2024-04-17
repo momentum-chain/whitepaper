@@ -26,7 +26,7 @@ email address or ORCID}
 
 \begin{abstract}
 This document outlines the key concepts and operational mechanics of a proposed blockchain
-system designed utilizing a novel consensus algorithm called proof-of-popularity.
+system utilizing a novel consensus algorithm called proof-of-popularity.
 \end{abstract}
 
 \begin{IEEEkeywords}
@@ -34,16 +34,14 @@ blockchain, smart contracts, cryptocurrency, DeFi, DLT
 \end{IEEEkeywords}
 
 \section{Introduction}
-Current conventional blockchain systems rely on either proof-of-work or proof-of-stake, which both 
-come with their own set of problems: Proof-of-work requires a large amount of computational power,
-which in our resource-constrained world draws lots of criticism for its wastefulness. Proof-of-stake
+Momentum is an implementation of a blockchain system utilizing the proof-of-popularity mechanism.
+
+Most conventional blockchain systems rely on a consensus mechanism which is either based on proof-of-work
+or proof-of-stake. Both come with their own set of problems: Proof-of-work requires a large amount of computational power,
+which draws a lot of criticism for its wastefulness in our resource-constrained world. Proof-of-stake
 usually involves pre-mining, which assigns a large amount of its value to predetermined wallet addresses.
 
-We propose a novel consensus algorithm called proof-of-popularity to address these problems and offer an
-alternative to conventional consensus algorithms.
-
-The following paper will outline the key concepts and operational mechanics of a proposed blockchain
-system called Momentum, utilizing proof-of-popularity.
+Proof-of-popularity addresses these problems and offers an alternative to the aforementioned consensus mechanism.
 
 \section{Definitions}
 
@@ -51,13 +49,18 @@ system called Momentum, utilizing proof-of-popularity.
 
 A participating Machine (Computer) in the Momentum Network. 
 
-\subsection{Drift}
+\subsection{Priority}
 
-Each block has a $block drift$ value. This value is cal
+For each timestamp there exists an order of addresses that determines the priority for each address to produce the next block.
+
+\subsection{Rank}
+
+Each block has a $rank$ value. This value specifies its rank in the priority list during the timestamp of block production.
 
 \subsection{Popularity}
 
-The popularity of a block
+The popularity of a block. This is the sum of the popularity of the previous block plus the weight of all collected signatures included in the block header.
+The chain that contains the most popular block is the valid (authorative) chain.
 
 \section{Overview}
 In a proof-of-popularity-based blockchain, the valid chain is always the chain that contains the block with the highest popularity.
@@ -70,11 +73,11 @@ On a high level, a well-behaved node in the Momentum network acts like this:
 \item Download block with highest popularity
 \item Validate block
 \item Await next timestamp
-\item Generate new block candidate $b$
+\item Generate new block candidate
 \item Send block hash to peers
 \item Await block hashes and signatures
-\item Send signature to the producer of the block with the lowest $block drift$
-\item Append block candidate to chain and advertise total popularity
+\item Send signature to the producer of the block with the highest $total rank$.
+\item Append block candidate to chain and advertise the new popularity
 \item Go to 1
 \end{enumerate}
 
@@ -87,8 +90,8 @@ A block is valid is if:
 \item The referenced previous block is valid.
 \item The timestamp of the block is exactly 1 greater than the timestamp of the referenced previous block.
 \item The timestamp of the block is lower or equal than the current timestamp.
-\item The $block drift$ value is correct
-\item The $total drift$ value equals the $total drift$ value of the referenced previous block plus the $block drift$ value of the block.
+\item The $rank$ value is correct
+\item The $total rank$ value equals the $total rank$ value of the referenced previous block plus the $rank$ value of the block.
 \end{itemize}
 
 \section{Consensus}
