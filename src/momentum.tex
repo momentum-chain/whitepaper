@@ -84,29 +84,27 @@ On a high level, a well-behaved node in the Momentum network acts like this:
 
 \subsection{Block validation}
 
-A block is valid is if:
+The goal of the nodes is to work together to build a chain of valid blocks. A block is valid if:
 
 \begin{itemize}
-\item There is no block with the same or lower timestamp and higher popularity.
+\item There is no block with the same or lower timestamp which has a higher popularity.
 \item The referenced previous block is valid.
 \item The timestamp of the block is exactly 1 greater than the timestamp of the referenced previous block.
-\item The timestamp of the block is lower or equal than the current timestamp.
+\item The timestamp of the block is lower than or equal to the current timestamp.
 \item The $rank$ value is correct
 \item The $total rank$ value equals the $total rank$ value of the referenced previous block plus the $rank$ value of the block.
 \end{itemize}
 
-\section{Consensus}
+\subsection{Rank}
 
-\subsection{Weighting Function}
+For each timestamp there exists a global order of all accounts that hold Momentum. This order is calculated using a weighting function that takes
+ a timestamp and the set of all accounts as input, and orders them using a weighted random
 
-\subsection{Signature Request}
+\section{Implementation}
 
-\subsection{Proof of Popularity}
 
-\section{Distributed Hash Table}
-Nodes store chain data in a DHT datastructure and advertise the total popularity value
-of their chain to other nodes. Other nodes should always download the chain with the highest total popularity.
-
+\subsection{Storage}
+While it's up to the implementation to decide on its data storage strategy, it makes sense to utilize a distributed hash table and leverage already existing implementations.
 
 \subsection{Peer Discovery}
 TODO: Utilize DHT implementation, for example Kademlia
@@ -119,12 +117,10 @@ grows and the number of signatures per block increases. The timestamp interval h
 to allow for a good amount of time for the last block to propagate through the DHT to many nodes.
 
 \section{Conclusion}
-Momentum and its proof-of-popularity-based approach offers non-trivial benefits over conventional blockchain systems.
+Momentum and its proof-of-popularity-based approach offers many benefits over conventional blockchain systems.
 For one, it does not utilize proof-of-work,
-and as such fits nicely into a resource-constrained and climate-consious environment. There also is no pre-mining of
+and as such fits nicely into a resource-constrained and climate-conscious environment. There also is no pre-mining of
 any form, which is usually required in a proof-of-stake blockchain.
-
-
 
 
 \section{Prepare Your Paper Before Styling}
