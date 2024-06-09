@@ -1,7 +1,13 @@
 # Momentum
 
-A general-purpose blockchain platform utilizing Proof-of-Popularity.
+A general-purpose blockchain platform implementing Proof-of-Popularity.
 
-This repository only contains the whitepaper source code.
+Please not that this repository only contains the source code to the (work-in-progress) whitepaper.
 
 There currently is no way to purchase or invest in Momentum as it is not released yet. If you're interested in investing, please sign up to [Shitcoin Swap](https://www.shitcoinswap.com), our official distribution channel.
+
+## Creating the Whitepaper
+
+You can use `pdflatex` to render the Whitepaper PDF. Install it by running `apt install pdflatex` or `dnf install texlive`.
+
+Then run `make` inside the `/src` dir.
