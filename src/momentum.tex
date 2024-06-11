@@ -44,20 +44,30 @@ usually involves pre-mining, which assigns a large amount of its value to predet
 Proof-of-popularity addresses these problems and offers an alternative to the aforementioned consensus mechanism.
 
 \section{Overview}
-In a proof-of-popularity-based blockchain, the valid chain is always the chain that contains the block with the highest popularity.
-Nodes work together to determine the popularity of any given block and ensure its integrity and thus the integrity of the network itself.
+Momentum operates under the assumption that for every timestamp t there exists one block with the highest popularity.
+The chain that contains the most popular block is the valid (authorative) chain.
 
-On a high level, a well-behaved node in the Momentum network acts like this:
+Nodes work together to determine the popularity of any given block, ensure its integrity, and thus the integrity of the entire chain.
+
+\section{Popularity}
+
+Popularity, and $proof-of-popularity$ are the underlying core concepts of Momentum. Each block has a given popularity value, and the block with the highest popularity determines the valid (authorative) chain.
+
+Now, the most important question that we have to answer is: How is the popularity of any given block determined?
+
+On a high level, a block gains popularity by collecting signatures of participating nodes.
+
+The mechanism for exchanging signatures works as follows:
 
 \begin{enumerate}
-\item Await total popularity advertisements from peers.
+\item Await total block advertisements from peers.
 \item Download block with highest popularity
 \item Validate block
 \item Await next timestamp
 \item Generate new block candidate
 \item Send block hash to peers
 \item Await block hashes and signatures
-\item Send signature to the producer of the block with the highest $total rank$.
+\item Send signature to the producer of the block with the lowest $total rank$.
 \item Append block candidate to chain and advertise the new popularity
 \item Go to 1
 \end{enumerate}
@@ -68,11 +78,14 @@ A block is valid if:
 
 \begin{itemize}
 \item There is no block with the same or lower timestamp which has a higher popularity.
-\item The referenced previous block is valid.
-\item The timestamp of the block is exactly 1 greater than the timestamp of the referenced previous block.
+\item The parent block is valid
+\item The block signature is correct
+\item All contained transactions are valid
+\item The timestamp of the block is exactly 1 greater than the timestamp of the parent block.
 \item The timestamp of the block is lower than or equal to the current timestamp.
 \item The $rank$ value is correct
-\item The $total rank$ value equals the $total rank$ value of the referenced previous block plus the $rank$ value of the block.
+\item The $total rank$ value equals the $total rank$ value of the parent block plus the $rank$ value of the block.
+
 \end{itemize}
 
 \section{Definitions}
@@ -83,12 +96,12 @@ A participating Machine (Computer) in the Momentum Network.
 
 \subsection{Rank}
 
-For each timestamp there exists a global order of all accounts that hold Momentum. This order is calculated using a randomized
-weighting function that takes a timestamp and the set of all accounts as input, and returns an ordered list of accounts.
-This order is used to determine the priority for each account to produce the next block. The rank of the block producers is included
+For each timestamp there exists a global order of all accounts that hold Momentum. This order is calculated using a weighted random order function.
+This function takes a timestamp and the set of all accounts, and returns an ordered list of accounts.
+This order is used to determine the rank for each account to produce the next block. The rank of the block producers is included
 in the block header.
 
-Each block has a $rank$ and $total rank$ value within its header. The $rank$ value specifies its rank in the priority list during the timestamp of block production.
+Each block contains a $rank$ and $total rank$ value within its header. The $rank$ value specifies its rank in the ordered list during the timestamp of block production.
 The $total rank$ value is the sum of all $rank$ values in the chain.
 
 
