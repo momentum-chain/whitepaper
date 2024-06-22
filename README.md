@@ -4,7 +4,7 @@ Momentum is a general-purpose blockchain platform implementing the proof-of-popu
 
 This repository only contains the source code to the (work-in-progress) whitepaper. For an implementation, please see the [momentum-go](https://github.com/momentum-foundation/momentum-go) repository.
 
-Please visit [Shitcoin Swap](https://www.shitcoinswap.com) if you'd like to participate in the pre-sale.
+Please visit [Shitcoin Swap](https://www.shitcoinswap.com/$MNT) if you'd like to participate in the pre-sale.
 
 ## Creating the Whitepaper
 
