@@ -2,7 +2,7 @@
 
 Momentum is a general-purpose blockchain platform implementing the proof-of-popularity consensus mechanism.
 
-This repository only contains the source code to the (work-in-progress) whitepaper. For an implementation, please see the [momentum-go](https://github.com/momentum-foundation/momentum-go) repository.
+This repository only contains the source code to the (work-in-progress) whitepaper. For an implementation, please see the [momentum-go](https://github.com/momentum-chain/momentum-go) repository.
 
 ## How to buy
 
